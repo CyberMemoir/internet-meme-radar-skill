@@ -1,0 +1,4 @@
+interface:
+  display_name: "Internet Meme Radar"
+  short_description: "Verify memes, slang, and viral trends with recent evidence"
+  default_prompt: "Research this meme or trend, explain how people use it, assess its current lifecycle, and clearly label uncertainty."
