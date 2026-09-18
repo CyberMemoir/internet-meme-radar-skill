@@ -2,6 +2,8 @@
 
 An evidence-first Codex skill for researching internet memes, slang, viral jokes, short-video formats, comment culture, and platform-specific references without inventing origins or overstating popularity.
 
+Part of [CyberMemoir](https://github.com/CyberMemoir), an open-source internet culture memory initiative developed and maintained by [Cogstruct AI](https://github.com/Cogstruct-ai).
+
 > 🏆 **小红书悬赏人气 REDSkill 第 17 名**
 
 ## Highlights
@@ -55,7 +57,7 @@ python3 scripts/trend_score.py \
 Copy the repository into your Codex skills directory:
 
 ```bash
-git clone https://github.com/jzjzzzzzzz/internet-meme-radar-skill.git \
+git clone https://github.com/CyberMemoir/internet-meme-radar-skill.git \
   ~/.codex/skills/internet-meme-radar
 ```
 
