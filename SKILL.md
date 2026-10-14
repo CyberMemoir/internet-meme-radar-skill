@@ -13,7 +13,10 @@ For an explicitly requested no-AI server collection workflow, use the standalone
 scripts described in [script collection](references/script-collection.md). They
 archive bounded public URL inputs and apply explicit text rules without an agent
 at runtime. Keep this mode separate from the interactive research route below;
-do not add model fallbacks or per-record review to the script workflow.
+do not add model fallbacks or per-record review to the script workflow. Sustained
+server collection uses the shared collector service linked in that reference,
+including RSS/Atom discovery, durable windows, source deduplication and monitoring;
+this interactive skill never becomes its runtime scheduler.
 
 1. **Scope the claim.** Identify the exact phrase or format, target platform/community, locale, and time window. Ask for missing artifacts only when they materially affect the answer.
 2. **Normalize the query.** Generate spelling, punctuation, hashtag, emoji, translation, pinyin/romanization, homophone, and deliberate-misspelling variants. Add intent terms such as meaning, origin, template, sound, or trend.

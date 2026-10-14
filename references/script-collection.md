@@ -40,3 +40,23 @@ business database. New formal entry qualification belongs to the shared analysis
 pipeline, not a platform reader or this research skill.
 
 Run offline checks with `python -m unittest discover -s tests`.
+
+## Continuous server collection
+
+For sustained collection use the shared [CyberMemoir collector](https://github.com/CyberMemoir/cyber-memoir/tree/codex/bilibili-text-collector-20261014/apps/collector).
+Its web adapter supports explicit allowlisted HTTPS URL lists and RSS/Atom discovery,
+durable scheduled windows, leases, per-platform process locks, bounded request pacing,
+cross-window item/version/observation deduplication, immutable raw HTML plus parsed
+text views, disk quotas, status metrics and verified backups. It does not import this
+interactive skill or run an agent. Standalone collect_web.py remains the bounded
+manual-window helper, not a sustained server scheduler.
+
+Feed-discovered links must remain inside the exact host allowlist. Dynamic pages,
+unexpected redirects and access challenges stop; there is no browser/model fallback.
+Request and item budgets preserve explicit partial coverage. This is an archive,
+not automatic formal meme admission. The legacy analysis helper expects its own
+items.jsonl evidence layout; the shared collector export is a distinct versioned
+source schema, not a drop-in input for analyze_sources.py.
+
+Offline recovery checks do not establish live source availability. Complete the
+shared service's Linux/live-window acceptance before expanding volume.
