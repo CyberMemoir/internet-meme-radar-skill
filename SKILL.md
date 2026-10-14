@@ -9,6 +9,12 @@ Analyze memes as changing cultural signals rather than fixed dictionary entries.
 
 ## Research route
 
+For an explicitly requested no-AI server collection workflow, use the standalone
+scripts described in [script collection](references/script-collection.md). They
+archive bounded public URL inputs and apply explicit text rules without an agent
+at runtime. Keep this mode separate from the interactive research route below;
+do not add model fallbacks or per-record review to the script workflow.
+
 1. **Scope the claim.** Identify the exact phrase or format, target platform/community, locale, and time window. Ask for missing artifacts only when they materially affect the answer.
 2. **Normalize the query.** Generate spelling, punctuation, hashtag, emoji, translation, pinyin/romanization, homophone, and deliberate-misspelling variants. Add intent terms such as meaning, origin, template, sound, or trend.
 3. **Collect evidence.** For current-status claims, prefer 5–10 dated examples from independent creators on the target platform, then 2–5 cross-platform examples and 1–3 contextual sources when useful. Deduplicate reposts.
