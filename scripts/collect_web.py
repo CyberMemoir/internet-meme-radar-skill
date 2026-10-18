@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import ipaddress
 import json
+import re
 import socket
 import time
 from datetime import UTC, datetime
@@ -33,6 +34,8 @@ class PageText(HTMLParser):
         self.skipped = 0
         self.parts = []
         self.blocks = []
+        self.in_title = False
+        self.title = ""
 
     def flush(self):
         text = "".join(self.parts).strip()
@@ -41,6 +44,8 @@ class PageText(HTMLParser):
         self.parts = []
 
     def handle_starttag(self, tag, attrs):
+        if tag == "title":
+            self.in_title = True
         if tag in {"script", "style", "nav", "footer"}:
             self.skipped += 1
         if not self.skipped and tag in {
@@ -56,12 +61,16 @@ class PageText(HTMLParser):
             self.flush()
 
     def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
         if tag in {"script", "style", "nav", "footer"}:
             self.skipped = max(0, self.skipped - 1)
         if not self.skipped and tag in {"p", "div", "li", "h1", "h2", "h3", "article"}:
             self.flush()
 
     def handle_data(self, data):
+        if self.in_title:
+            self.title += data
         if not self.skipped:
             self.parts.append(data)
 
@@ -70,6 +79,12 @@ def parse_html(body: bytes, charset="utf-8") -> list[str]:
     parser = PageText()
     parser.feed(body.decode(charset, errors="strict"))
     parser.flush()
+    if re.search(
+        r"^(?:captcha|access denied|just a moment|verify you are human|安全验证|访问受限)\b",
+        parser.title.strip(),
+        re.I,
+    ):
+        raise AccessBlocked("HTTP 200 access challenge; stop this host")
     return parser.blocks
 
 
@@ -223,3 +238,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

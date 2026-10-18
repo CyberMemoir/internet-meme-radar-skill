@@ -11,6 +11,53 @@ from collect_web import AccessBlocked, collect, parse_html
 
 
 class ScriptCollectionTests(unittest.TestCase):
+    def test_http_200_challenge_stops_host_and_survives_resume(self):
+        urls = ["https://example.org/challenge", "https://example.org/next"]
+        calls = []
+
+        def fetch(url, _):
+            calls.append(url)
+            return (
+                b"<html><title>Just a moment</title><p>Verify you are human</p></html>",
+                "utf-8",
+            )
+
+        with tempfile.TemporaryDirectory() as folder:
+            for _ in range(2):
+                state = collect(
+                    urls,
+                    Path(folder),
+                    {"example.org"},
+                    fetch=fetch,
+                    sleep=lambda _: None,
+                )
+                self.assertFalse(state["sources"])
+                self.assertEqual(state["blocked_hosts"], ["example.org"])
+                self.assertEqual(state["failures"][urls[0]]["type"], "AccessBlocked")
+            self.assertEqual(calls, [urls[0]])
+
+    def test_challenge_titles_are_distinct_from_an_article_discussing_verification(
+        self,
+    ):
+        for title in (
+            "CAPTCHA",
+            "Access denied",
+            "Just a moment...",
+            "Verify you are human",
+            "安全验证",
+            "访问受限",
+        ):
+            with self.subTest(title=title), self.assertRaises(AccessBlocked):
+                parse_html(
+                    f"<html><title>{title}</title><p>challenge</p></html>".encode()
+                )
+        self.assertIn(
+            "Verify you are human",
+            parse_html(
+                b"<title>How verification works</title><p>Verify you are human</p>"
+            ),
+        )
+
     def test_archive_resume_and_domain_stop_do_not_repeat_requests(self):
         urls = [
             "https://example.org/one",

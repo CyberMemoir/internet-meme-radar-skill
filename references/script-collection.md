@@ -18,6 +18,12 @@ that permit the intended collection. Successful sources are not fetched again on
 resume, and original observed times are retained. HTML is limited to 4 MB; strict
 decoding failures are explicit. Text locators refer to parsed JSON, not HTML offsets.
 
+HTTP 200 challenge pages with explicit verification/access-denied titles stop the
+host too; they are not archived as successful article text. The stop remains in
+the checkpoint across restarts. Ordinary articles discussing verification are
+not classified from body keywords alone. The four offline tests include both
+cases and persistent host-stop/resume behavior.
+
 The analysis input is JSONL with source_id, url, texts[{text,locator}] and optional
 source evidence. Accepting a rule match requires a local JSON evidence file, its
 SHA-256, and a JSON pointer that resolves to the exact text. The path is confined to
@@ -60,3 +66,4 @@ source schema, not a drop-in input for analyze_sources.py.
 
 Offline recovery checks do not establish live source availability. Complete the
 shared service's Linux/live-window acceptance before expanding volume.
+
