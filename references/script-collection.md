@@ -67,3 +67,12 @@ source schema, not a drop-in input for analyze_sources.py.
 Offline recovery checks do not establish live source availability. Complete the
 shared service's Linux/live-window acceptance before expanding volume.
 
+The shared service also has an optional, disabled-by-default video evidence layer
+for Bilibili, RedCrack and Douyin candidates: bounded selection, direct MP4 files,
+existing platform/page subtitle tracks, hashes, timed cues, restart replay and
+cross-window reuse. It does not follow arbitrary video links from this web helper.
+There is no OCR/ASR/model generation and no automatic definition, usage-context or
+origin/derivation claim. A missing track is an explicit coverage gap. The existing
+web analyzer still expects its own evidence layout and cannot directly consume
+the shared service's media-enriched source export.
+
