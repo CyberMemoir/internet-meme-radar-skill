@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 .env
 .env.*
+.data/
+output/
+downloads/

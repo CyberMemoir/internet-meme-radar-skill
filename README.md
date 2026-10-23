@@ -8,6 +8,10 @@ Part of [CyberMemoir](https://github.com/CyberMemoir), an open-source internet c
 
 ## Highlights
 
+- Standalone no-AI HTML collection and explicit text-rule analysis: see
+  [script collection](references/script-collection.md). These scripts require no
+  Codex session or per-item approval and do not publish or generate new definitions.
+
 - Verifies time-sensitive trend claims with dated, platform-specific evidence.
 - Separates literal meaning, actual usage, tone, origin, popularization, and lifecycle.
 - Detects repost inflation, fandom bursts, creator-only virality, and manufactured campaigns.
